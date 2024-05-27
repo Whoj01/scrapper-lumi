@@ -24,7 +24,6 @@
     "@vitest/coverage-v8": "^1.1.0",
     "nodemon": "^3.1.0",
     "prisma": "^5.14.0",
-    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3",
     "vitest": "^1.1.0"
@@ -34,6 +33,7 @@
     "@fastify/cors": "^8.5.0",
     "@ilovepdf/ilovepdf-nodejs": "^0.2.5",
     "@prisma/client": "^5.14.0",
+    "ts-node": "^10.9.2",
     "aws-sdk": "^2.1524.0",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
