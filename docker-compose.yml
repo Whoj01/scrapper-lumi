@@ -2,6 +2,7 @@ version: '3'
 
 services:
   server:
+    container_name: server
     build:
       context: ./server
       dockerfile: ./dockerfiles/Dockerfile
@@ -15,6 +16,7 @@ services:
     restart: always
 
   web:
+    container_name: web
     build:
       context: ./web
       dockerfile: ./dockerfiles/Dockerfile
