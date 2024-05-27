@@ -26,6 +26,7 @@
     "prisma": "^5.14.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
     "vitest": "^1.1.0"
   },
   "dependencies": {
@@ -33,7 +34,6 @@
     "@fastify/cors": "^8.5.0",
     "@ilovepdf/ilovepdf-nodejs": "^0.2.5",
     "@prisma/client": "^5.14.0",
-    "ts-node": "^10.9.2",
     "aws-sdk": "^2.1524.0",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
