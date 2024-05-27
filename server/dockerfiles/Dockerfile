@@ -1,16 +1,11 @@
 FROM node:20.10.0 as builder
 
-RUN useradd --create-home lumiServer
-USER lumiServer
+ADD package*.json /server
 
-WORKDIR /server
+RUN npm ci
 
-ADD package.json /server
+COPY . /server
 
-RUN npm install
+RUN npm run build
 
-COPY . /web
-
-RUN npx prisma generate
-
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "start"]

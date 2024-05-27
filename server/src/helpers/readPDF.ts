@@ -67,7 +67,7 @@ export const readPDF = (pathToPdf: string) =>
 		const barCode = "NnNnWwNwNnWnNnNnWwWnNwNnNnNnWwWwNnNnNnWwWwNnNnNnWwWwNnWnNnNwNwW";
 
 		import('pdfreader').then((pdfreader) => {
-			new pdfreader.PdfReader({}).parseFileItems(pathToPdf, (err: any, item: PdfReader.PdfItem) => {
+			new pdfreader.PdfReader({}).parseFileItems(pathToPdf, (err: any, item: any) => {
 				if (err) {
 					logger.error("Erro ao ler pdf", err);
 					reject(err);

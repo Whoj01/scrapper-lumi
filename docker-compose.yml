@@ -22,7 +22,6 @@ services:
       - 3000:3000
     volumes:
       - ./web:/web
-      - :/node_modules
     networks:
       - internal-network
     tty: true
