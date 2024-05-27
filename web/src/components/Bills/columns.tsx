@@ -76,11 +76,14 @@ export const getColumns = ({ setQRcodeModal }: GetColumnsProps): ColumnDef<BillW
       cell: ({ row }) => {
         return (
           <div className="flex items-center justify-end gap-3 w-full">
-            <QrCode size={16} className="text-buttonBackground hover:-translate-y-[2px] hover:brightness-50 transition-all cursor-pointer" onClick={() => setQRcodeModal({
-              pix: row.original.pix,
-              qrcode: row.original.qrcode
-            }, true
-            )} />
+            { (row.original.qrcode && row.original.pix) && (
+              <QrCode size={16} className="text-buttonBackground hover:-translate-y-[2px] hover:brightness-50 transition-all cursor-pointer" onClick={() => setQRcodeModal({
+                pix: row.original.pix,
+                qrcode: row.original.qrcode
+              }, true
+              )} />
+            )}
+            
 
             <Download size={16} className="text-buttonBackground hover:-translate-y-[2px] hover:brightness-50 transition-all cursor-pointer"
               onClick={() => downloadPdf(row.original.pdf, `${row.original.user_name}-${dayjs(row.original.month).format('MMM/YY')}`)}

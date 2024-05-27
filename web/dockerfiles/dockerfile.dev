@@ -6,7 +6,7 @@ ADD package*.json /web
 
 RUN npm ci
 
-COPY --chown=lumiWeb:nodejs . /web
+COPY . /web
 
 RUN npm install
 

@@ -59,7 +59,7 @@ const Input = ({ className, type, ...props }: InputProps) => {
         )}
 
         {value.length > 0 && (
-          <div className="absolute py-2 opacity-0 group-focus-within:opacity-100 top-full left-0  w-full border border-input rounded-b-md z-10 bg-cardBackground">
+          <div className="absolute py-2 visibility-hidden pointer-events-none opacity-0 group-focus-within:opacity-100 group-focus-within:visibility-visible group-focus-within:pointer-events-auto top-full left-0  w-full border border-input rounded-b-md z-10 bg-cardBackground">
             <ul className="flex flex-col gap-2 items-start justify-center [&>li:not(:last-child)]:border-b">
               {users?.length > 0 && users.map((user) => (
                 <Link className="w-full" href={`/usuarios/${user.code}`} key={user.id}>

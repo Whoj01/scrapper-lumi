@@ -18,8 +18,8 @@ model User {
 model Bill {
   id                   String   @id @default(uuid())
   month                DateTime @db.Date
-  qrcode               String
-  qrcodeKey            String
+  qrcode               String?
+  qrcodeKey            String?
   pdf                  String
   pdfKey               String
   economyGD            Int
@@ -33,7 +33,7 @@ model Bill {
   energyConsume        Int
   price                Int
   averageEnergyConsume Int
-  pix                  String
+  pix                  String?
   userId               String?
   User                 User?    @relation(fields: [userId], references: [id])
 }

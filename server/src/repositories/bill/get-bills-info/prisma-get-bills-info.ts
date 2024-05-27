@@ -30,13 +30,13 @@ export class PrismaGetBillsInfoRepository implements IGetBillsInfoRepository {
 				const parsedBillsOfUser = z.array(schemaBill).safeParse(billsOfUser);
 
 				if (parsedBillsOfUser.success) {
-					return billsOfUser;
+					return billsOfUser as Bill[];
 				}
 
 				return false;
 			}
 
-			const billsOfUser: Bill[] = await prismaClient.bill.findMany({
+			const billsOfUser = await prismaClient.bill.findMany({
 				where: {
 					User: {
 						code: {
@@ -52,7 +52,7 @@ export class PrismaGetBillsInfoRepository implements IGetBillsInfoRepository {
 			const parsedBillsOfUser = z.array(schemaBill).safeParse(billsOfUser);
 
 			if (parsedBillsOfUser.success) {
-				return billsOfUser;
+				return billsOfUser as Bill[];
 			}
 
 			return false;
@@ -63,7 +63,7 @@ export class PrismaGetBillsInfoRepository implements IGetBillsInfoRepository {
 		const parsedBillsOfUser = z.array(schemaBill).safeParse(allBills);
 
 		if (parsedBillsOfUser.success) {
-			return allBills;
+			return allBills as Bill[];
 		}
 
 		return false;

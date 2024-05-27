@@ -17,7 +17,7 @@ export const readQRcode = async (pathToQR: string) => {
 	const decodedQR = qrcode(imageData.data, imageData.width, imageData.height);
 
 	if (!decodedQR) {
-		logger.error("QRcode not found");
+		logger.error("QRcode não foi decodificado.");
 	}
 
 	return decodedQR?.data;

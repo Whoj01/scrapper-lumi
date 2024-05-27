@@ -28,7 +28,7 @@ export const ValuesEnergyContainer = ({ bills, users }: ValuesEnergyContainerPro
   const { highestValueWithoutGD, percentageValueWithoutGD, userWithHighestValueWithoutGD } = getMostValueWithoutGD(users, bills)
 
   return (
-    <div className="flex flex-wrap w-full h-full md:max-h-[750px] items-start justify-start gap-3">
+    <div className="flex flex-wrap w-full h-full md:max-h-[750px] items-start justify-start gap-3 pb-4">
       <div className="flex items-start flex-wrap justify-start gap-3 w-full md:flex-nowrap flex-grow self-stretch">
         {chartType.type === 'EconomyGD' && <ValueEconomyGDGraphCard bills={bills} users={users} />}
 
@@ -45,19 +45,18 @@ export const ValuesEnergyContainer = ({ bills, users }: ValuesEnergyContainerPro
             className="text-green-100"
           />}
         </div>
-      </div>
 
-      <div className="w-full">
-        {userWithHighestValueWithoutGD && <UserInfoCard
-          title="Maior valor sem GD"
-          text="usuário que mais gastou sem economia GD"
-          textInfo={`${percentageValueWithoutGD.toFixed(2)}% a mais que os outros usuários`}
-          user={userWithHighestValueWithoutGD}
-          value={`R$${highestValueWithoutGD}`}
-          className="text-red-500"
-        />}
-      </div>
+        <div className="w-full">
+          {userWithHighestValueWithoutGD && <UserInfoCard
+            title="Maior valor sem GD"
+            text="usuário que mais gastou sem economia GD"
+            textInfo={`${percentageValueWithoutGD.toFixed(2)}% a mais que os outros usuários`}
+            user={userWithHighestValueWithoutGD}
+            value={`R$${highestValueWithoutGD}`}
+            className="text-red-500"
+          />}
+        </div>
+      </div>  
     </div>
-
   )
 }

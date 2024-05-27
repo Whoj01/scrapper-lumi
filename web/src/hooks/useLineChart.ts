@@ -67,7 +67,6 @@ export const useLineChart = () => {
         responsive: true,
         maintainAspectRatio: false,
         aspectRatio: 1,
-       
         scales: {
           x: {
             ticks: {

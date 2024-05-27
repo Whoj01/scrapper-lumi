@@ -92,31 +92,40 @@ moment.locale("pt");
 				const extractQRcodeFromPDF = await extractQRcode(pdfToJpg);
 
 				const qrcodeInfo = await readQRcode(extractQRcodeFromPDF);
-	
-				const uploadedQRcode = await uploadImageToS3(extractQRcodeFromPDF);
-	
-				const createdBill = await prismaClient.bill.create({
-					data: {
-						averageEnergyConsume: chunk.mediaConsumo,
-						compensedEnergy: chunk.energiaCompensada,
-						economyGD: chunk.economiaGD,
-						energyConsume: chunk.consumoEnergiaEletrica,
-						month: moment(chunk.mes, "MMM/YY").toISOString(),
-						pdf: finalPath,
-						ContributionMun: chunk.ContributionMun,
-						EnergyElectricKW: chunk.EnergyEletricKW,
-						EnergyElectricValue: chunk.EnergyEletricValue,
-						EnergySCEEEKW: chunk.EnergySCEEEKW,
-						EnergySCEEEValue: chunk.EnergySCEEEValue,
-						pdfKey: aws_key,
-						price: chunk.totalPrice,
-						pix: qrcodeInfo ?? "",
-						qrcode: uploadedQRcode?.finalPath ?? "",
-						qrcodeKey: uploadedQRcode?.aws_key ?? "",
-						totalValueWithoutGD: chunk.valorTotalsemGD,
-						userId: createdUser?.id,
-					},
-				});
+
+				let uploadedQRcode: UploadS3Return | undefined;
+
+				if (qrcodeInfo) {
+					uploadedQRcode = await uploadImageToS3(extractQRcodeFromPDF);
+				}	
+
+				try {
+					const createdBill = await prismaClient.bill.create({
+						data: {
+							averageEnergyConsume: chunk.mediaConsumo,
+							compensedEnergy: chunk.energiaCompensada,
+							economyGD: chunk.economiaGD,
+							energyConsume: chunk.consumoEnergiaEletrica,
+							month: moment(chunk.mes, "MMM/YY").toISOString(),
+							pdf: finalPath,
+							ContributionMun: chunk.ContributionMun,
+							EnergyElectricKW: chunk.EnergyEletricKW,
+							EnergyElectricValue: chunk.EnergyEletricValue,
+							EnergySCEEEKW: chunk.EnergySCEEEKW,
+							EnergySCEEEValue: chunk.EnergySCEEEValue,
+							pdfKey: aws_key,
+							price: chunk.totalPrice,
+							pix: qrcodeInfo ?? "",
+							qrcode: uploadedQRcode?.finalPath ?? "",
+							qrcodeKey: uploadedQRcode?.aws_key ?? "",
+							totalValueWithoutGD: chunk.valorTotalsemGD,
+							userId: createdUser?.id,
+						},
+					});
+				} catch (error) {
+					console.log(error)
+				}
+				
 	
 				usersAlreadyInDatabase[chunk.nome].id = createdUser?.id || "";
 	
@@ -153,31 +162,41 @@ moment.locale("pt");
 				const extractQRcodeFromPDF = await extractQRcode(pdfToJpg);
 	
 				const qrcodeInfo = await readQRcode(extractQRcodeFromPDF) as string;
+
+				let uploadedQRcode: UploadS3Return | undefined;
+
+				if (qrcodeInfo) {
+					uploadedQRcode = await uploadImageToS3(extractQRcodeFromPDF) as UploadS3Return;
+				}
 	
-				const uploadedQRcode = await uploadImageToS3(extractQRcodeFromPDF) as UploadS3Return;
-	
-				await prismaClient.bill.create({
-					data: {
-						averageEnergyConsume: chunk.mediaConsumo,
-						compensedEnergy: chunk.energiaCompensada,
-						economyGD: chunk.economiaGD,
-						ContributionMun: chunk.ContributionMun,
-						EnergyElectricKW: chunk.EnergyEletricKW,
-						EnergyElectricValue: chunk.EnergyEletricValue,
-						EnergySCEEEKW: chunk.EnergySCEEEKW,
-						EnergySCEEEValue: chunk.EnergySCEEEValue,
-						energyConsume: chunk.consumoEnergiaEletrica,
-						month: moment(chunk.mes, "MMM/YY").toISOString(),
-						pdf: finalPath,
-						pdfKey: aws_key,
-						price: chunk.totalPrice,
-						pix: qrcodeInfo,
-						qrcode: uploadedQRcode.finalPath,
-						qrcodeKey: uploadedQRcode.aws_key,
-						totalValueWithoutGD: chunk.valorTotalsemGD,
-						userId: findUser?.id ?? usersAlreadyInDatabase[chunk.nome].id,
-					},
-				});
+				try {
+					await prismaClient.bill.create({
+						data: {
+							averageEnergyConsume: chunk.mediaConsumo,
+							compensedEnergy: chunk.energiaCompensada,
+							economyGD: chunk.economiaGD,
+							ContributionMun: chunk.ContributionMun,
+							EnergyElectricKW: chunk.EnergyEletricKW,
+							EnergyElectricValue: chunk.EnergyEletricValue,
+							EnergySCEEEKW: chunk.EnergySCEEEKW,
+							EnergySCEEEValue: chunk.EnergySCEEEValue,
+							energyConsume: chunk.consumoEnergiaEletrica,
+							month: moment(chunk.mes, "MMM/YY").toISOString(),
+							pdf: finalPath,
+							pdfKey: aws_key,
+							price: chunk.totalPrice,
+							pix: qrcodeInfo ?? "",
+							qrcode: uploadedQRcode?.finalPath ?? "",
+							qrcodeKey: uploadedQRcode?.aws_key ?? "",
+							totalValueWithoutGD: chunk.valorTotalsemGD,
+							userId: findUser?.id ?? usersAlreadyInDatabase[chunk.nome].id,
+						},
+					});
+					
+				} catch (error) {
+					console.log(chunk)
+					console.log(error)
+				}
 
 				try {
 					fs.unlinkSync(pdfToJpg);

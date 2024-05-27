@@ -13,8 +13,11 @@ export const useBillAPI = () => {
     tokenGetBillsCancel = axios.CancelToken.source()
 
     const { data } = await api.get(`/bills${user_identificator ? `/${user_identificator}` : ''}`).catch((err) => {
+      console.log(err)
       throw new Error('Erro ao buscar faturas')
     })
+
+    console.log(data)
 
     return {
       bill: data.data

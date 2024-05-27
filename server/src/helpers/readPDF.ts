@@ -168,6 +168,7 @@ export const readPDF = (pathToPdf: string) =>
 								// Recuperando o valor da energia elétrica e o valor do KW que estão na mesma linha
 								const energiaEletricaValue = tempString
 									.split(" ")[4]
+									?.replace(".", "")
 									?.replace(",", ".");
 								const energiaEletricaKW = tempString
 									.split(" ")[2]
@@ -202,6 +203,18 @@ export const readPDF = (pathToPdf: string) =>
 								informationNeeded.EnergiaSCEEE.value = energiaSCEEEValue;
 								informationNeeded.EnergiaSCEEEKW.value = energiaSCEEEKW;
 							}
+
+							if (tempString.includes("En-comp.-s/-ICMS")) {
+								const energiaSCEEEKW = tempString.split(" ")[2]?.replace(".", "");
+
+								// substituindo virgula por ponto para nao retornar NaN na conversão para número
+								const energiaSCEEEValue = tempString
+									.split(" ")[4]
+									?.replace(",", ".");
+	
+								informationNeeded.EnergiaSCEEE.value = energiaSCEEEValue;
+								informationNeeded.EnergiaSCEEEKW.value = energiaSCEEEKW;
+							}
 	
 							if (tempString.includes("Histórico-de-Consumo")) {
 								// Recuperando o valor do mês e o valor da média do mês
@@ -219,7 +232,9 @@ export const readPDF = (pathToPdf: string) =>
 							}
 	
 							if (tempString.includes("TOTAL")) {
-								const priceOfMonth = tempString.split(" ")[1]?.replace(",", ".");
+								const priceOfMonth = tempString.split(" ")[1]
+									?.replace(".", "")
+									?.replace(",", ".");
 	
 								informationNeeded.totalPrice.value = priceOfMonth;
 							}

@@ -12,7 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest dev",
     "test:cov": "vitest run --coverage",
-    "start:dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/index.ts"
+    "start:dev": "nodemon -I --exec node --experimental-specifier-resolution=node --loader ts-node/esm ./src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +34,6 @@
     "@fastify/cors": "^8.5.0",
     "@ilovepdf/ilovepdf-nodejs": "^0.2.5",
     "@prisma/client": "^5.14.0",
-    "aws-sdk": "^2.1524.0",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "fastify": "^4.25.1",

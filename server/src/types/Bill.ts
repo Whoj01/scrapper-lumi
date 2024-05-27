@@ -7,11 +7,11 @@ export interface Bill {
 	month: Date;
 	price: number;
 	averageEnergyConsume: number;
-	pix: string;
-	qrcode: string;
+	pix: string | null;
+	qrcode: string | null;
 	pdf: string;
 	qrcodeKey: string;
-	pdfKey: string;
+	pdfKey: string | null;
 	userId: string | null;
 	ContributionMun: number;
 	EnergyElectricKW: number;
