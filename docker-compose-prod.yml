@@ -1,0 +1,92 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: ./dockerfiles/Dockerfile
+    ports:
+      - 3333:3333
+    volumes:
+      - ./server:/server
+    networks:
+      - internal-network
+    tty: true
+    restart: always
+    environment:
+      TZ: "America/Sao_Paulo"
+      VIRTUAL_PORT: 3333
+      VIRTUAL_HOST: api.lumitest.devjosuehub.com.br
+      LETSENCRYPT_HOST: api.lumitest.devjosuehub.com.br
+      LETSENCRYPT_EMAIL: josueneto.camargo@gmail.com
+
+  web:
+    build:
+      context: ./web
+      dockerfile: ./dockerfiles/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/web
+      - :/node_modules
+    networks:
+      - internal-network
+    tty: true
+    environment:
+      TZ: "America/Sao_Paulo"
+      VIRTUAL_PORT: 3000
+      VIRTUAL_HOST: www.lumitest.devjosuehub.com.br, devjosuehub.com.br
+      LETSENCRYPT_HOST: www.lumitest.devjosuehub.com.br, devjosuehub.com.br
+      LETSENCRYPT_EMAIL: josueneto.camargo@gmail.com
+  jwildernginxproxy1:
+    image: jwilder/nginx-proxy
+    container_name: jwildernginxproxy1
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./proxy.conf:/etc/nginx/conf.d/my_proxy.conf
+    networks:
+      - internal-network
+    restart: always
+  letsencrypt-nginx-proxy-companion1:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx-proxy-companion1
+    environment:
+      - NGINX_PROXY_CONTAINER=jwildernginxproxy
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - internal-network
+    restart: always
+  database:
+    image: postgres
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=2553218858"
+      - "POSTGRES_DB=lumitest"
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+  
+networks:
+  internal-network:
+    driver: bridge
+
+volumes:
+  certs:
+  html:
+  vhostd:
+  pg-data:

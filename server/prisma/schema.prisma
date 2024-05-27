@@ -1,0 +1,39 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id @default(uuid())
+  name  String @unique
+  code  String @unique
+  bills Bill[]
+}
+
+model Bill {
+  id                   String   @id @default(uuid())
+  month                DateTime @db.Date
+  qrcode               String
+  qrcodeKey            String
+  pdf                  String
+  pdfKey               String
+  economyGD            Int
+  totalValueWithoutGD  Int
+  compensedEnergy      Int
+  EnergyElectricValue  Int
+  EnergyElectricKW     Int
+  ContributionMun      Int
+  EnergySCEEEValue     Int
+  EnergySCEEEKW        Int
+  energyConsume        Int
+  price                Int
+  averageEnergyConsume Int
+  pix                  String
+  userId               String?
+  User                 User?    @relation(fields: [userId], references: [id])
+}

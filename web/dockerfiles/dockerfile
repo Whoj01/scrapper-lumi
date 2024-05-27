@@ -1,0 +1,13 @@
+FROM node:20.10.0-alpine as builder
+
+WORKDIR /web
+
+ADD package*.json /web
+
+RUN npm ci
+
+COPY --chown=lumiWeb:nodejs . /web
+
+RUN npm install
+
+CMD ["npm", "run", "dev"]

@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: ./dockerfiles/Dockerfile
+    ports:
+      - 3333:3333
+    volumes:
+      - ./server:/server
+    networks:
+      - internal-network
+    tty: true
+    restart: always
+
+  web:
+    build:
+      context: ./web
+      dockerfile: ./dockerfiles/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/web
+      - :/node_modules
+    networks:
+      - internal-network
+    tty: true
+  
+  database:
+    image: postgres
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=2553218858"
+      - "POSTGRES_DB=lumitest"
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - internal-network
+  
+networks:
+  internal-network:
+    driver: bridge
+
+volumes:
+  pg-data:
