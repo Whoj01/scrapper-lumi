@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "npm i && next build",
+    "start": "npm i && next start",
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest dev",
