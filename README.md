@@ -46,7 +46,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
  Esse projeto foi desenvolvido para o teste de vaga da Lumi desenvolvedor Pleno, com o objetivo de testar as capacidades técnicas do candidato.
  Para o Backend eu utilizei o *Repository Pattern* para ter inversão das dependencias e modalização dos componentes para testes.
  No Frontend utilizei o Nextjs 14, se utilizando de custom hooks e *Composition Pattern* para modular o código e deixar cada arquivo com sua responsabilidade.
- Acess
 
 ## 🚀 Deploy
  Fiz o código para deploy que pode ser visualizado nos commits anteriores, mas a vps não suportou os containers. :(
