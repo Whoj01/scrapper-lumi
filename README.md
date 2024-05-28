@@ -81,6 +81,9 @@ Essas são as funcionaliadades do projeto:
   - Pesquisa por usuários, podendo ver todos os dados das faturas separado pelos meses.
   - Pesquisa na tabela de faturas, para visualizar um usuário fácilmente.
 
+- Projeto
+  - Dockarização com hotreload para facilitar reprodução em diversos ambientes.
+
 ## ⌨ Comandos
 
 Primeiro comece clonando o repositório
