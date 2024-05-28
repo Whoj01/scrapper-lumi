@@ -119,6 +119,10 @@ Vamos instalar as dependências para não reclamar sobre os imports:
 
 **Projeto**
 
+Vamos voltar para a pasta raiz:
+
+``` cd .. ```
+
 Depois de instalar as depêndencias para não ter erros no desenvolvimento e teste, vamos levantar nosso container docker do projeto:
 
 ``` sudo docker compose up -d --build ```
