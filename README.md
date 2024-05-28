@@ -86,7 +86,7 @@ Essas são as funcionaliadades do projeto:
 
 ## ⌨ Comandos
 
-Primeiro comece clonando o repositório
+Primeiro comece clonando o repositório. **Importante: Se estiver utilizando o wsl2, clone o projeto dentro do sistema de arquivos do linux, pois o wsl2 não consegue transmitir atualizações de arquivos para o linux**
 
 ``` git clone https://github.com/Whoj01/Lumi-test.git ```
 
