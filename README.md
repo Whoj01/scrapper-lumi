@@ -83,6 +83,8 @@ Essas são as funcionaliadades do projeto:
 
 - Projeto
   - Dockarização com hotreload para facilitar reprodução em diversos ambientes.
+ 
+  Utilizei postman para testar e listar as rotas. Você pode baixar e importar no seu postman clicando [aqui!](https://drive.google.com/file/d/16IqeWZnAY0fY_JMm4YmXmXx-CSBiNTms/view?usp=sharing)
 
 ## ⌨ Comandos
 
