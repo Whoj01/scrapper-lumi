@@ -61,13 +61,14 @@ Essas são as funcionaliadades do projeto:
   - Extração dos dados relevantes do pdf fornecido.
   - Extração e leitura do qrcode para obter de seu valor.
   - Tranformação do qrcode em imagem para upload na aws s3.
-  - Uplaod do pdf para a aws s3.
+  - Upload do pdf para a aws s3.
   - Logger com informações sobre o que está acontecendo no servidor.
   - Pesquisa por identificador do usuário.
   - Retorno de todos os usuários.
   - Pesquisa por indentificador do usuário em contas.
   - Retorno de todas as contas.
   - Retorno de fatura pelo mês e usuário referente.
+  - Testes unitários e de integração
 
 - Fronted
   - Loading skeleton em toda a aplicação se utilizando da Suspense API.
@@ -75,10 +76,11 @@ Essas são as funcionaliadades do projeto:
   - Tratamento de página não encontrada.
   - Página de dashboard com informações revelantes sobre os dados do usuário.
   - Página de Faturas com tabela para baixar pdf e visualizar o qrcode, podendo ler e copiar o pix.
+  - Página de usuários com todas as suas faturas.
   - Filtro de informações na tabela por usuário.
   - Responsividade Completa
   - Pesquisa por usuários, podendo ver todos os dados das faturas separado pelos meses.
-  - Pesquisa na tabela de faturas, para visualizar um usuário fácilmente.
+  - testes unitários
 
 - Projeto
   - Dockarização com hotreload para facilitar reprodução em diversos ambientes.
